@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<p>You order with Order ID <%= @order.order_id %> status updated to <%= @order.status %>!</p>
+<p>
+  Details<br>
+  --------------------------
+</p>
+<p>Sender Email: <%= @order.sender.email %></p>
+<p>Receiver Email: <%= @order.receiver.email %></p>
+<p>
+  Message:<br>
+  ----------
+</p>
+<p><%= @order.status %></p>
+</body>
+</html>

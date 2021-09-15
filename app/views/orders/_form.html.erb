@@ -1,0 +1,56 @@
+<%= form_with(model: order) do |form| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+        <% order.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if order.order_id.present? %>
+    <div class="field">
+      <%= form.label :status %>
+      <%= form.select :status, options_for_select(Order.statuses.map {|key, value| [key.titleize, Order.statuses.key(value)]}, order.status) %>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :weight %>
+    <%= form.number_field :weight %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_type %>
+    <%= form.select :service_type, options_for_select(Order.service_types.map {|key, value| [key.titleize, Order.service_types.key(value)]}, order.service_type) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :service_cost %>
+    <%= form.number_field :service_cost %>
+  </div>
+
+  <div class="field">
+    <%= form.label :payment_mode %>
+    <%= form.select :payment_mode, options_for_select(Order.payment_modes.map {|key, value| [key.titleize, Order.payment_modes.key(value)]}, order.payment_mode) %>  </div>
+  </div>
+
+  <div class="field">
+    <%= form.label :sender_id %>
+    <%= form.collection_select :sender_id, User.order(created_at: :desc), :id, :full_name, include_blank: false %>
+  </div>
+
+  <div class="field">
+    <%= form.label :receiver_id %>
+    <%= form.collection_select :receiver_id, User.order(created_at: :desc), :id, :full_name, include_blank: false %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<a href="/users/new">Create Sender/Receiver</a>

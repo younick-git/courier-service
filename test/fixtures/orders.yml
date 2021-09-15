@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  weight: 1
+  service_type: 1
+  service_cost: 1
+  payment_mode: 1
+  status: 1
+  sender_id: 
+  receiver_id: 
+
+two:
+  weight: 1
+  service_type: 1
+  service_cost: 1
+  payment_mode: 1
+  status: 1
+  sender_id: 
+  receiver_id: 

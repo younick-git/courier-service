@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @order.weight %>
+</p>
+
+<p>
+  <strong>Service type:</strong>
+  <%= @order.service_type %>
+</p>
+
+<p>
+  <strong>Service cost:</strong>
+  <%= @order.service_cost %>
+</p>
+
+<p>
+  <strong>Payment mode:</strong>
+  <%= @order.payment_mode %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @order.status %>
+</p>
+
+<p>
+  <strong>Sender:</strong>
+  <%= @order.sender.email %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @order.receiver.email %>
+</p>
+
+<%= link_to 'Edit', edit_order_path(@order) %> |
+<%#= link_to 'Back', orders_path %>

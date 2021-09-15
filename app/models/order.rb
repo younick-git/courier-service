@@ -17,7 +17,6 @@ class Order < ApplicationRecord
 
   validate :users_validation
   def users_validation
-    binding.pry 
     if sender_id == receiver_id
       self.errors[:base] << "Sender and receiver can't be same!!!"
     end

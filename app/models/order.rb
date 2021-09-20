@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+require 'order_id_generator'
 
 class Order < ApplicationRecord
   belongs_to :sender, class_name: 'User'
@@ -6,7 +7,11 @@ class Order < ApplicationRecord
 
   enum service_type: %i[speed_post regular]
   enum payment_mode: %i[cod prepaid]
-  enum status: %i[sent in_transit delivered]
+  enum status: {
+    sent: 0,
+    in_transit: 1,
+    delivered: 2,
+  }
 
   validates :service_type, presence: true
   validates :weight, presence: true
@@ -23,10 +28,14 @@ class Order < ApplicationRecord
   end
 
   after_create do
-    self.order_id = loop do
-      random_id = SecureRandom.urlsafe_base64(nil, false)
-      break random_id unless Order.exists?(id: random_id)
-    end
+    self.order_id = OrderIdGenerator.get_order_id
     self.save!
+  end
+
+  before_save do
+    if self.class.statuses[status] <= self.class.statuses[status_was]
+      self.errors[:base] << "Invalid Status!!!"
+      raise_validation_error
+    end
   end
 end

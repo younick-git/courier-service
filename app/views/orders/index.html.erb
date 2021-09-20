@@ -9,9 +9,9 @@
 <table>
   <thead>
     <tr>
-      <th>Weight(in gms)</th>
+      <th>Weight (gms)</th>
       <th>Service type</th>
-      <th>Service cost</th>
+      <th>Service cost (INR)</th>
       <th>Payment mode</th>
       <th>Status</th>
       <th>Sender</th>
@@ -25,10 +25,10 @@
     <% @orders.each do |order| %>
       <tr>
         <td><%= order.weight %></td>
-        <td><%= order.service_type %></td>
+        <td><%= order.service_type.titleize %></td>
         <td><%= order.service_cost %></td>
-        <td><%= order.payment_mode %></td>
-        <td><%= order.status %></td>
+        <td><%= order.payment_mode.upcase %></td>
+        <td><%= order.status.titleize %></td>
         <td><%= order.sender.email %></td>
         <td><%= order.receiver.email %></td>
         <td><%= order.order_id %></td>

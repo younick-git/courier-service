@@ -4,17 +4,11 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<p>You order with Order ID <%= @order.order_id %> status updated to <%= @order.status %>.</p>
+<p>You order with Order ID <%= @order.order_id %> status updated.</p>
+<p>STATUS: <%= @order.status.titleize %></p>
 <p>
-  Details<br>
-  --------------------------
-</p>
-<p>Sender Email: <%= @order.sender.email %></p>
-<p>Receiver Email: <%= @order.receiver.email %></p>
-<p>
-  Message:<br> <a href="<%= @url %>">Click here </a>to see your order status. <br>
+  Message:<br> <a href="<%= @url %>">Click here </a>to see your live status. <br>
   ----------
 </p>
-<p>STATUS: <%= @order.status %></p>
 </body>
 </html>

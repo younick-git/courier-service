@@ -35,7 +35,7 @@
 
   <div class="field">
     <%= form.label :payment_mode %>
-    <%= form.select :payment_mode, options_for_select(Order.payment_modes.map {|key, value| [key.titleize, Order.payment_modes.key(value)]}, order.payment_mode) %>  </div>
+    <%= form.select :payment_mode, options_for_select(Order.payment_modes.map {|key, value| [key.upcase, Order.payment_modes.key(value)]}, order.payment_mode) %>  </div>
   </div>
 
   <div class="field">

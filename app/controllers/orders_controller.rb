@@ -4,9 +4,9 @@ class OrdersController < ApplicationController
   # GET /orders or /orders.json
   def index
     @orders = if params[:order_id].present?
-                Order.where('order_id LIKE ?', "%#{params[:order_id]}%")
+                Order.where(order_id: params[:order_id]).paginate(:page => 1, per_page: 1)
               else
-                Order.all
+                Order.paginate(:page => params[:page], per_page: 5)
               end
   end
 
@@ -24,10 +24,14 @@ class OrdersController < ApplicationController
   # POST /orders or /orders.json
   def create
     @order = Order.new(order_params)
+    if Rails.env != 'production'
+      host = "http://#{request.host}:#{request.port.to_s}"
+    else
+      host = "https://#{request.host}"
+    end
     respond_to do |format|
       if @order.save
-        @order.update(order_id: OrderIdGenerater.get_order_id(@order))
-        UserMailer.with(order: @order).send_order_email.deliver_now
+        UserMailer.with(order: @order, host: host).send_order_email.deliver_now
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
@@ -39,9 +43,14 @@ class OrdersController < ApplicationController
 
   # PATCH/PUT /orders/1 or /orders/1.json
   def update
+    if Rails.env != 'production'
+      host = "http://#{request.host}:#{request.port.to_s}"
+    else
+      host = "https://#{request.host}"
+    end
     respond_to do |format|
       if @order.update(order_params)
-        UserMailer.with(order: @order).send_updated_order_email.deliver_now
+        UserMailer.with(order: @order, host: host).send_updated_order_email.deliver_now
         format.html { redirect_to @order, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else

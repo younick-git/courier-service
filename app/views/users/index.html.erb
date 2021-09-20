@@ -33,3 +33,10 @@
 <br>
 
 <%= link_to 'New User', new_user_path %>
+<br><br>
+<div class="test_pagination_users">
+  <div class="page_info_users">
+    <%= page_entries_info @posts %>
+  </div>
+  <%= will_paginate @posts, :container => false %>
+</div>

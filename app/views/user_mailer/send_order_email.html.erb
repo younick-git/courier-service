@@ -4,7 +4,7 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-<p>You got a new order with Order ID <%= @order.order_id %>!</p>
+<p>You got a new order with Order ID <%= @order.order_id %>.</p>
 <p>
   Details<br>
   --------------------------
@@ -12,9 +12,9 @@
 <p>Sender Email: <%= @order.sender.email %></p>
 <p>Receiver Email: <%= @order.receiver.email %></p>
 <p>
-  Message:<br>
+  Message:<br><a href="<%= @url %>">Click here</a> to see your order status.<br>
   ----------
 </p>
-<p><%= @order.status %></p>
+<p>STATUS: <%= @order.status %></p>
 </body>
 </html>

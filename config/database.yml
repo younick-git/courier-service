@@ -17,10 +17,10 @@
 default: &default
   adapter: postgresql
   encoding: utf-8
-  host:  localhost
-  username: postgres
-  password: postgres
-  port: 5433
+  host:  <%= ENV['DB_HOST'] %>
+  username: <%= ENV['DB_USER_NAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  port: 5432
 
 development:
   <<: *default

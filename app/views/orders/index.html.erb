@@ -9,7 +9,7 @@
 <table>
   <thead>
     <tr>
-      <th>Weight</th>
+      <th>Weight(in gms)</th>
       <th>Service type</th>
       <th>Service cost</th>
       <th>Payment mode</th>
@@ -43,3 +43,10 @@
 <br>
 
 <%= link_to 'New Order', new_order_path %>
+<br><br>
+<div class="test_pagination_orders">
+  <div class="page_info_orders">
+    <%= page_entries_info @orders %>
+  </div>
+  <%= will_paginate @orders, :container => false %>
+</div>

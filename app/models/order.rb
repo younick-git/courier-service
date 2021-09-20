@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Order < ApplicationRecord
-  belongs_to :sender, dependent: :destroy, class_name: 'User'
-  belongs_to :receiver, dependent: :destroy, class_name: 'User'
+  belongs_to :sender, class_name: 'User'
+  belongs_to :receiver, class_name: 'User'
 
   enum service_type: %i[speed_post regular]
   enum payment_mode: %i[cod prepaid]
@@ -20,5 +20,13 @@ class Order < ApplicationRecord
     if sender_id == receiver_id
       self.errors[:base] << "Sender and receiver can't be same!!!"
     end
+  end
+
+  after_create do
+    self.order_id = loop do
+      random_id = SecureRandom.urlsafe_base64(nil, false)
+      break random_id unless Order.exists?(id: random_id)
+    end
+    self.save!
   end
 end

@@ -33,7 +33,7 @@ class Order < ApplicationRecord
   end
 
   before_save do
-    if self.class.statuses[status] <= self.class.statuses[status_was]
+    if self.class.statuses[status] < self.class.statuses[status_was]
       self.errors[:base] << "Invalid Status!!!"
       raise_validation_error
     end
